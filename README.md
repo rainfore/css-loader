@@ -1,4 +1,12 @@
-# css loader for webpack
+# vision-css-loader
+
+> This is a fork of [css-loader](https://github.com/webpack/css-loader) with some modifications for handling Vision Components.
+
+## Modifications
+
+- Changed `getLocalIdent` function directly to make `.root` class converted to a simple name;(This function cannot be transfered by inline query of webpack loader)
+
+## Origins
 
 ## installation
 

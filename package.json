@@ -1,6 +1,6 @@
 {
-  "name": "css-loader",
-  "version": "0.26.1",
+  "name": "vision-css-loader",
+  "version": "0.1.0",
   "author": "Tobias Koppers @sokra",
   "description": "css loader module for webpack",
   "engines": {
@@ -36,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:webpack/css-loader.git"
+    "url": "git@github.com:vision-app/vision-css-loader.git"
   },
   "license": "MIT"
 }
