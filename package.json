@@ -1,6 +1,6 @@
 {
   "name": "vision-css-loader",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Tobias Koppers @sokra",
   "description": "css loader module for webpack",
   "engines": {
