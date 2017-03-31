@@ -4,7 +4,8 @@
 
 ## Modifications
 
-- Changed `getLocalIdent` function directly to make `.root` class converted to a simple name;(This function cannot be transfered by inline query of webpack loader)
+- Change `getLocalIdent` function directly to make `.root` class converted to a simple name. (This function cannot be transfered by inline query of webpack loader)
+- Append short hash to converted name unless the component name starts with `u-`.
 
 ## Origins
 
