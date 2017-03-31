@@ -1,6 +1,6 @@
-# vision-css-loader
+# vusion-css-loader
 
-> This is a fork of [css-loader](https://github.com/webpack/css-loader) with some modifications for handling Vision Components.
+> This is a fork of [css-loader](https://github.com/webpack/css-loader) with some modifications for handling Vusion Components.
 
 ## Modifications
 

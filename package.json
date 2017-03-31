@@ -1,5 +1,5 @@
 {
-  "name": "vision-css-loader",
+  "name": "vusion-css-loader",
   "version": "0.1.3",
   "author": "Tobias Koppers @sokra",
   "description": "css loader module for webpack",
@@ -36,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:vision-app/vision-css-loader.git"
+    "url": "git@github.com:vusion-app/vusion-css-loader.git"
   },
   "license": "MIT"
 }
