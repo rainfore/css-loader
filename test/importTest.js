@@ -1,6 +1,10 @@
 /*globals describe */
 
-var test = require("./helpers").test;
+var assert = require('assert');
+
+var helpers = require("./helpers");
+var test = helpers.test;
+var testError = helpers.testError;
 
 describe("import", function() {
 	test("import", "@import url(test.css);\n.class { a: b c d; }", [
@@ -9,12 +13,39 @@ describe("import", function() {
 	], "", {
 		"./test.css": [[2, ".test{a: b}", ""]]
 	});
+	test("import camelcase", "@IMPORT url(test.css);\n.class { a: b c d; }", [
+		[2, ".test{a: b}", ""],
+		[1, ".class { a: b c d; }", ""]
+	], "", {
+		"./test.css": [[2, ".test{a: b}", ""]]
+	});
+    test("import empty url", "@import url();\n.class { a: b c d; }", [
+        [1, "@import url();\n.class { a: b c d; }", ""]
+    ], "");
+    test("import empty url with quotes", "@import url('');\n.class { a: b c d; }", [
+        [1, "@import url('');\n.class { a: b c d; }", ""]
+    ], "");
 	test("import with string", "@import \"test.css\";\n.class { a: b c d; }", [
 		[2, ".test{a: b}", ""],
 		[1, ".class { a: b c d; }", ""]
 	], "", {
 		"./test.css": [[2, ".test{a: b}", ""]]
 	});
+	test("import with empty string", "@import \"\";\n.class { a: b c d; }", [
+		[1, "@import \"\";\n.class { a: b c d; }", ""]
+	], "");
+	test("import with string contain spaces", "@import \"   \";\n.class { a: b c d; }", [
+		[1, "@import \"   \";\n.class { a: b c d; }", ""]
+	], "");
+	test("import with string contain newline", "@import \"\n\";\n.class { a: b c d; }", [
+		[1, "@import \"\n\";\n.class { a: b c d; }", ""]
+	], "");
+	test("import with string contain CRLF", "@import \"\r\n\";\r\n.class { a: b c d; }", [
+		[1, "@import \"\r\n\";\r\n.class { a: b c d; }", ""]
+	], "");
+	test("import with string contain tab", "@import \"\t\";\n.class { a: b c d; }", [
+		[1, "@import \"\t\";\n.class { a: b c d; }", ""]
+	], "");
 	test("import 2", "@import url('test.css');\n.class { a: b c d; }", [
 		[2, ".test{a: b}", "screen"],
 		[1, ".class { a: b c d; }", ""]
@@ -39,4 +70,16 @@ describe("import", function() {
 	test("import disabled", "@import url(test.css);\n.class { a: b c d; }", [
 		[1, "@import url(test.css);\n.class { a: b c d; }", ""]
 	], "?-import");
-});
+	test("@import-normalize left untouched", "@import-normalize;", [
+		[1, "@import-normalize;", ""]
+	]);
+	testError("@import without url", "@import;", function(err) {
+		assert.equal(err.message, [
+			'Unexpected format  (1:1)',
+			'',
+			'> 1 | @import;',
+			'    | ^',
+			'',
+		].join('\n'))
+	})
+})

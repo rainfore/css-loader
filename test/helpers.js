@@ -19,7 +19,7 @@ function getEvaluated(output, modules) {
 			return "{" + module + "}";
 		});
 	} catch(e) {
-		console.error(output);
+		console.error(output); // eslint-disable-line no-console
 		throw e;
 	}
 	delete m.exports.toString;
@@ -30,6 +30,10 @@ function getEvaluated(output, modules) {
 function assetEvaluated(output, result, modules) {
 	var exports = getEvaluated(output, modules);
 	exports.should.be.eql(result);
+}
+
+function assertRaw(output, result) {
+	output.should.containEql(result);
 }
 
 function runLoader(loader, input, map, addOptions, callback) {
@@ -69,9 +73,21 @@ exports.test = function test(name, input, result, query, modules) {
 	});
 };
 
+exports.testRaw = function testRaw(name, input, result, query, modules) {
+	it(name, function(done) {
+		runLoader(cssLoader, input, undefined, !query || typeof query === "string" ? {
+			query: query
+		} : query, function(err, output) {
+			if(err) return done(err);
+			assertRaw(output, result, modules);
+			done();
+		});
+	});
+}
+
 exports.testError = function test(name, input, onError) {
 	it(name, function(done) {
-    runLoader(cssLoader, input, undefined, {}, function(err, output) {
+    runLoader(cssLoader, input, undefined, {}, function(err, output) { // eslint-disable-line no-unused-vars
       if (!err) {
         done(new Error('Expected error to be thrown'));
       } else {
