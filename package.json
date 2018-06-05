@@ -1,5 +1,5 @@
 {
-  "name": "vusion-css-loader",
+  "name": "@vusion/css-loader",
   "version": "0.3.3",
   "author": "Tobias Koppers @sokra",
   "license": "MIT",
